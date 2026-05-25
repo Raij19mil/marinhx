@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DM - Produções Cinematográficas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2 family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Smooth Scroll Fade Effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Fullscreen Video Config */
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .bg-gradient-hero {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            transition: background 0.8s ease;
+        }
+
+        /* Color Themes Layout Variables */
+        .theme-events {
+            --bg-main: #FBF9F6;
+            --bg-card: rgba(255, 255, 255, 0.6);
+            --text-main: #2A2421;
+            --text-muted: #6E6153;
+            --border-alpha: rgba(42, 36, 33, 0.08);
+            --hero-blend: linear-gradient(to bottom, rgba(251, 249, 246, 0.3), rgba(251, 249, 246, 1));
+            background-color: var(--bg-main);
+            color: var(--text-main);
+        }
+        .theme-institutional {
+            --bg-main: #0A0A0A;
+            --bg-card: rgba(18, 18, 18, 0.6);
+            --text-main: #F3F4F6;
+            --text-muted: #9CA3AF;
+            --border-alpha: rgba(255, 255, 255, 0.06);
+            --hero-blend: linear-gradient(to bottom, rgba(10, 10, 10, 0.2), rgba(10, 10, 10, 1));
+            background-color: var(--bg-main);
+            color: var(--text-main);
+        }
+
+        /* Micro Borders and Adjustments for High-End Feel */
+        .thin-border {
+            border: 0.5px solid var(--border-alpha);
+        }
+        .thin-border-b {
+            border-bottom: 0.5px solid var(--border-alpha);
+        }
+        .thin-border-t {
+            border-top: 0.5px solid var(--border-alpha);
+        }
+
+        /* Parallax & Scale Transitions */
+        .hero-video-element {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.02);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+    </style>
+</head>
+<body class="theme-events min-h-screen relative flex flex-col justify-between">
+
+    <canvas id="particle-canvas"></canvas>
+
+    <section class="w-full h-screen relative flex flex-col justify-between z-10 thin-border-b">
+        <div class="hero-video-container">
+            <div id="hero-overlay" class="bg-gradient-hero"></div>
+            <video id="video-events-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-100" autoplay loop muted playsinline>
+                <source src="SaveClip.App_AQNfdZpTFp7CNNOhBnN8Psql4VF3eQsgOszzkf96LXkwdwGSu7kfFtQQLXRDRZUY2BU5G813YzvFxxMN1z3U-Ih9IiPlOZvz5JuwJZQ.mp4" type="video/mp4">
+            </video>
+            <video id="video-inst-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-0" loop muted playsinline>
+                <source src="IMG_1636.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <header class="w-full max-w-6xl mx-auto px-8 py-6 flex justify-between items-center z-30 relative">
+            <div class="text-xl font-light tracking-[0.3em] text-[var(--text-main)]">DM</div>
+            
+            <div class="relative bg-black/5 dark:bg-white/5 backdrop-blur-md rounded-full p-0.5 flex items-center thin-border transition-all duration-500">
+                <button id="toggle-events" class="px-5 py-1.5 rounded-full text-[10px] font-medium uppercase tracking-widest transition-all duration-300 relative z-10 text-[var(--text-main)]" onclick="switchTheme('events')">
+                    Eventos
+                </button>
+                <button id="toggle-inst" class="px-5 py-1.5 rounded-full text-[10px] font-medium uppercase tracking-widest transition-all duration-300 relative z-10 text-[var(--text-muted)]" onclick="switchTheme('institutional')">
+                    Institucional
+                </button>
+            </div>
+        </header>
+
+        <div class="w-full max-w-6xl mx-auto px-8 mb-24 z-30 relative mt-auto">
+            <div class="max-w-2xl">
+                <span class="text-[10px] uppercase tracking-[0.4em] opacity-60 mb-4 block" id="hero-tagline">Eventos / Intimista</span>
+                <h1 class="text-3xl sm:text-5xl md:text-6xl serif-font font-extralight leading-[1.15] transition-all duration-700" id="hero-title">
+                    Técnica com sensibilidade
+                </h1>
+                <p class="mt-4 text-xs sm:text-sm font-light tracking-wide max-w-md opacity-70 leading-relaxed" id="hero-subtitle">
+                    Seu sonho em um Filme. Capturando instantes intangíveis através de lentes cinematográficas de alta precisão.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <main class="w-full bg-[var(--bg-main)] z-20 relative transition-colors duration-700">
+        
+        <section class="w-full max-w-6xl mx-auto px-8 py-24 reveal">
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Portfolio em movimento</span>
+                    <h2 class="text-xl font-light tracking-wider uppercase">Filmes em Destaque</h2>
+                </div>
+                <div class="w-1/3 h-[0.5px] bg-[var(--border-alpha)]"></div>
+            </div>
+
+            <div id="showreel-grid" class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                </div>
+        </section>
+
+        <section class="w-full max-w-6xl mx-auto px-8 py-20 border-t border-[var(--border-alpha)] reveal">
+            <div class="max-w-md mb-16">
+                <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Estrutura e escopo</span>
+                <h2 class="text-xl font-light uppercase tracking-wider">Nossas frentes de atuação</h2>
+            </div>
+
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                </div>
+        </section>
+
+        <section class="w-full max-w-6xl mx-auto px-8 py-24 border-t border-[var(--border-alpha)] reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-4 sticky top-12">
+                    <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Workflow de Alto Padrão</span>
+                    <h2 class="text-xl font-light uppercase tracking-wider mb-6">Como moldamos a sua obra</h2>
+                    <p class="text-xs font-light opacity-60 leading-relaxed">Cada frame passa por etapas meticulosas de refinamento estético e alinhamento conceitual de storytelling.</p>
+                </div>
+                <div class="lg:col-span-8 space-y-8">
+                    <div class="p-6 thin-border rounded-xl bg-[var(--bg-card)] backdrop-blur-sm">
+                        <span class="text-xs font-light serif-font opacity-40 block mb-1">01 / Direção Narrativa</span>
+                        <h4 class="text-sm font-medium tracking-wide mb-2">Planejamento e Pré-produção</h4>
+                        <p class="text-xs font-light opacity-60 leading-relaxed">Definição do tom, decupagem de cenas e intenção emocional para alinhar o filme aos objetivos visuais refinados do projeto.</p>
+                    </div>
+                    <div class="p-6 thin-border rounded-xl bg-[var(--bg-card)] backdrop-blur-sm">
+                        <span class="text-xs font-light serif-font opacity-40 block mb-1">02 / Direção de Fotografia</span>
+                        <h4 class="text-sm font-medium tracking-wide mb-2">Captação em Lentes de Cinema</h4>
+                        <p class="text-xs font-light opacity-60 leading-relaxed">Utilização de iluminação cirúrgica, movimentos fluidos de camera rig e enquadramentos de alta moda inspirados na estética Vogue.</p>
+                    </div>
+                    <div class="p-6 thin-border rounded-xl bg-[var(--bg-card)] backdrop-blur-sm">
+                        <span class="text-xs font-light serif-font opacity-40 block mb-1">03 / Pós-produção Avançada</span>
+                        <h4 class="text-sm font-medium tracking-wide mb-2">Color Grading & Sound Design</h4>
+                        <p class="text-xs font-light opacity-60 leading-relaxed">Edição de ritmo preciso, mixagem imersiva e colorização personalizada em matrizes cromáticas luxuosas de nível internacional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full py-12 thin-border-t thin-border-b bg-[var(--bg-card)] reveal">
+            <div class="max-w-6xl mx-auto px-8">
+                <p class="text-[9px] uppercase tracking-[0.25em] text-center mb-8 opacity-50 font-light">Marcas e Direções atendidas</p>
+                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale contrast-200" id="logos-container">
+                    </div>
+            </div>
+        </section>
+
+        <section class="w-full max-w-6xl mx-auto px-8 py-24 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div>
+                    <h3 class="text-2xl sm:text-3xl serif-font font-light mb-6 leading-snug" id="contact-title">
+                        Pronto para elevar o patamar audiovisual da sua marca?
+                    </h3>
+                    <p class="text-xs opacity-60 font-light max-w-sm mb-10 leading-relaxed">
+                        Desenvolvemos projetos sob medida alinhados às suas expectativas estéticas e de posicionamento.
+                    </p>
+                    <button class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full text-[10px] font-semibold uppercase tracking-widest bg-[var(--text-main)] text-[var(--bg-main)] transition-transform duration-500 hover:scale-[1.03] shadow-md">
+                        Solicitar Atendimento
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+
+                <form class="space-y-8 w-full">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div class="relative">
+                            <input type="text" placeholder="Seu nome" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40" required>
+                        </div>
+                        <div class="relative">
+                            <input type="email" placeholder="Seu e-mail" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40" required>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <textarea rows="2" placeholder="Conte-nos brevemente a sua visão artística" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40 resize-none" required></textarea>
+                    </div>
+                    <button type="submit" class="text-[10px] font-bold uppercase tracking-widest pb-1.5 border-b border-[var(--text-main)] hover:opacity-50 transition-opacity">
+                        Enviar briefing
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full bg-[var(--bg-main)] text-center py-8 text-[9px] uppercase tracking-widest opacity-40 thin-border-t z-20 relative transition-colors duration-700">
+        &copy; 2026 DM Filmes. All rights reserved.
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Reveal-on-Scroll Engine Layout
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Content Database Configuration
+        const content = {
+            events: {
+                heroTagline: "Eventos / Intimista",
+                heroSubtitle: "Seu sonho em um Filme. Capturando instantes intangíveis através de lentes cinematográficas de alta precisão.",
+                heroBlend: "linear-gradient(to bottom, rgba(251, 249, 246, 0.25), rgba(251, 249, 246, 1))",
+                services: [
+                    { icon: "camera", title: "Fotografia Fina", desc: "Registros focados na cumplicidade e na verdade refinada de casais." },
+                    { icon: "video", title: "Vídeo Teaser", desc: "Filmes dinâmicos de 1 a 3 minutos perfeitos para o ecossistema digital corporativo ou pessoal." },
+                    { icon: "film", title: "Longa-Metragem Cerimonial", desc: "Cobertura de longa duração rica em áudio original e edição cinematográfica detalhada." }
+                ],
+                showreel: [
+                    { type: 'video', src: 'SaveClip.App_AQNfdZpTFp7CNNOhBnN8Psql4VF3eQsgOszzkf96LXkwdwGSu7kfFtQQLXRDRZUY2BU5G813YzvFxxMN1z3U-Ih9IiPlOZvz5JuwJZQ.mp4', cols: 'md:col-span-8', aspect: 'aspect-[21/9]' },
+                    { type: 'image', src: 'https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=600&q=80', cols: 'md:col-span-4', aspect: 'aspect-video' }
+                ],
+                logos: [
+                    { name: "CVC", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/CVC_logo.svg/1280px-CVC_logo.svg.png" },
+                    { name: "Vogue", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vogue_Logo.svg/1280px-Vogue_Logo.svg.png" },
+                    { name: "Tiffany", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Tiffany_%26_Co._logo.svg/1280px-Tiffany_%26_Co._logo.svg.png" }
+                ],
+                contactTitle: "Quer alguém que realmente se importe com o que está captando?"
+            },
+            institutional: {
+                heroTagline: "Institucional / Corporativo",
+                heroSubtitle: "Filmes comerciais e corporativos estruturados para posicionar marcas, conectar valores e escalonar negócios.",
+                heroBlend: "linear-gradient(to bottom, rgba(10, 10, 10, 0.15), rgba(10, 10, 10, 1))",
+                services: [
+                    { icon: "building-2", title: "Brand Documentaries", desc: "A essência e cultura corporativa documentadas de forma sólida e impactante." },
+                    { icon: "clapperboard", title: "Filmes Corporativos", desc: "Cobertura de painéis, grandes convenções e lançamentos com acabamento impecável." },
+                    { icon: "tv", title: "Comerciais de Conversão", desc: "Anúncios estruturados com foco em engajamento emocional, alto valor percebido e estética elegante." }
+                ],
+                showreel: [
+                    { type: 'video', src: 'IMG_1636.mp4', cols: 'md:col-span-7', aspect: 'aspect-video' },
+                    { type: 'image', src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80', cols: 'md:col-span-5', aspect: 'aspect-video' }
+                ],
+                logos: [
+                    { name: "Sony", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/1280px-Sony_logo.svg.png" },
+                    { name: "RED", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Red_Digital_Cinema_logo.svg/1280px-Red_Digital_Cinema_logo.svg.png" },
+                    { name: "Apple", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png" }
+                ],
+                contactTitle: "Pronto para elevar o patamar audiovisual da sua marca?"
+            }
+        };
+
+        // Render Functions Module
+        function renderServices(theme) {
+            const grid = document.getElementById('services-grid');
+            grid.innerHTML = content[theme].services.map(s => `
+                <div class="p-6 rounded-xl thin-border bg-[var(--bg-card)] backdrop-blur-md transition-all duration-300 hover:translate-y-[-4px]">
+                    <div class="mb-4 text-[var(--text-main)] opacity-70">
+                        <i data-lucide="${s.icon}" class="w-5 h-5 stroke-[1.25]"></i>
+                    </div>
+                    <h3 class="text-sm font-medium tracking-wide mb-2">${s.title}</h3>
+                    <p class="text-xs font-light leading-relaxed text-[var(--text-muted)]">${s.desc}</p>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function renderShowreel(theme) {
+            const grid = document.getElementById('showreel-grid');
+            grid.innerHTML = content[theme].showreel.map(item => {
+                if (item.type === 'video') {
+                    return `
+                        <div class="${item.cols} ${item.aspect} overflow-hidden rounded-xl bg-black thin-border relative group">
+                            <video class="w-full h-full object-cover opacity-80 group-hover:scale-[1.01] transition-transform duration-700" autoplay loop muted playsinline>
+                                <source src="${item.src}" type="video/mp4">
+                            </video>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="${item.cols} ${item.aspect} bg-cover bg-center rounded-xl thin-border relative group" style="background-image: url('${item.src}')">
+                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <i data-lucide="play" class="w-6 h-6 text-white stroke-[1.25]"></i>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+            lucide.createIcons();
+        }
+
+        function renderLogos(theme) {
+            const container = document.getElementById('logos-container');
+            container.innerHTML = content[theme].logos.map(logo => `
+                <img src="${logo.url}" alt="${logo.name}" class="h-4 object-contain max-w-[100px] transition-all duration-700">
+            `).join('');
+        }
+
+        function updateOverlayAndStyles(theme) {
+            const overlay = document.getElementById('hero-overlay');
+            overlay.style.background = content[theme].heroBlend;
+            
+            if(theme === 'events') {
+                document.documentElement.style.setProperty('--logo-filter', 'none');
+            } else {
+                document.documentElement.style.setProperty('--logo-filter', 'invert(1) brightness(2)');
+            }
+        }
+
+        // Particle Transition Burst Framework
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedY = Math.random() * -0.8 - 0.2;
+                this.alpha = Math.random() * 0.4 + 0.2;
+                this.decay = Math.random() * 0.008 + 0.004;
+            }
+            update() { this.y += this.speedY; this.alpha -= this.decay; }
+            draw() {
+                ctx.save(); ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = '#ffffff'; ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function triggerDustBurst() {
+            canvas.style.opacity = '1'; particles = [];
+            for(let i=0; i<40; i++) { particles.push(new Particle()); }
+            animateParticles();
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles = particles.filter(p => p.alpha > 0);
+            particles.forEach(p => { p.update(); p.draw(); });
+            if (particles.length > 0) { requestAnimationFrame(animateParticles); } 
+            else { canvas.style.opacity = '0'; }
+        }
+
+        // Theme Switch Architecture Controller
+        function switchTheme(theme) {
+            const body = document.body;
+            const vEvents = document.getElementById('video-events-hero');
+            const vInst = document.getElementById('video-inst-hero');
+            const btnEvents = document.getElementById('toggle-events');
+            const btnInst = document.getElementById('toggle-inst');
+
+            triggerDustBurst();
+
+            if (theme === 'events') {
+                body.className = "theme-events min-h-screen relative flex flex-col justify-between";
+                vEvents.style.opacity = '1'; vInst.style.opacity = '0';
+                vInst.pause(); vEvents.play();
+
+                btnEvents.classList.replace('text-[var(--text-muted)]', 'text-[var(--text-main)]');
+                btnInst.classList.replace('text-[var(--text-main)]', 'text-[var(--text-muted)]');
+            } else {
+                body.className = "theme-institutional min-h-screen relative flex flex-col justify-between";
+                vEvents.style.opacity = '0'; vInst.style.opacity = '1';
+                vEvents.pause(); vInst.play();
+
+                btnInst.classList.replace('text-[var(--text-muted)]', 'text-[var(--text-main)]');
+                btnEvents.classList.replace('text-[var(--text-main)]', 'text-[var(--text-muted)]');
+            }
+
+            // Update Text Node Items
+            document.getElementById('hero-tagline').innerText = content[theme].heroTagline;
+            document.getElementById('hero-subtitle').innerText = content[theme].heroSubtitle;
+            document.getElementById('contact-title').innerText = content[theme].contactTitle;
+
+            updateOverlayAndStyles(theme);
+            renderServices(theme);
+            renderShowreel(theme);
+            renderLogos(theme);
+        }
+
+        // Initialize Native Page View
+        updateOverlayAndStyles('events');
+        renderServices('events');
+        renderShowreel('events');
+        renderLogos('events');
+    </script>
+</body>
+</html>
