@@ -124,6 +124,7 @@
                     <button id="nav-events" onclick="switchTheme('events')" class="text-white text-xs font-semibold uppercase tracking-widest transition-colors">Eventos</button>
                     <button id="nav-inst" onclick="switchTheme('institutional')" class="text-white/50 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Institucional</button>
                     <div class="w-[1px] h-4 bg-white/20"></div> <a href="#showreel-grid" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Portfólio</a>
+                    <a href="nossa-visao.html" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Nossa Visão</a>
                     <a href="#services-grid" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Serviços</a>
                 </div>
 
@@ -154,7 +155,10 @@
                     <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Portfolio em movimento</span>
                     <h2 class="text-xl font-light tracking-wider uppercase">Filmes em Destaque</h2>
                 </div>
-                <div class="w-1/3 h-[0.5px] bg-[var(--border-alpha)]"></div>
+                <div class="flex items-center gap-6 grow justify-end">
+                    <div class="hidden sm:block h-[0.5px] bg-[var(--border-alpha)] grow max-w-[200px]"></div>
+                    <a href="galeria-exclusiva.html" class="text-[10px] uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">Ver mais <i data-lucide="plus" class="w-3 h-3"></i></a>
+                </div>
             </div>
 
             <div id="showreel-grid" class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
@@ -279,8 +283,10 @@
                     { icon: "film", title: "Longa-Metragem Cerimonial", desc: "Cobertura de longa duração rica em áudio original e edição cinematográfica detalhada." }
                 ],
                 showreel: [
-                    { type: 'video', src: 'SaveClip.webm', cols: 'md:col-span-8', aspect: 'aspect-[21/9]' },
-                    { type: 'image', src: 'https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=600&q=80', cols: 'md:col-span-4', aspect: 'aspect-video' }
+                    { type: 'video', src: 'SaveClip.webm', cols: 'md:col-span-8', aspect: 'aspect-[21/9]', title: 'João & Maria', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Tiffany_%26_Co._logo.svg/1280px-Tiffany_%26_Co._logo.svg.png' },
+                    { type: 'image', src: 'https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=600&q=80', cols: 'md:col-span-4', aspect: 'aspect-square', title: 'Wedding Editorial', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vogue_Logo.svg/1280px-Vogue_Logo.svg.png' },
+                    { type: 'video', src: 'SaveClip.webm', cols: 'md:col-span-4', aspect: 'aspect-video', title: 'Recife Gala', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/CVC_logo.svg/1280px-CVC_logo.svg.png' },
+                    { type: 'image', src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80', cols: 'md:col-span-8', aspect: 'aspect-[21/9]', title: 'Summer Event', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/1280px-Sony_logo.svg.png' }
                 ],
                 logos: [
                     { name: "CVC", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/CVC_logo.svg/1280px-CVC_logo.svg.png" },
@@ -300,8 +306,9 @@
                     { icon: "tv", title: "Comerciais de Conversão", desc: "Anúncios estruturados com foco em engajamento emocional, alto valor percebido e estética elegante." }
                 ],
                 showreel: [
-                    { type: 'video', src: 'IMG_1636.mp4', cols: 'md:col-span-7', aspect: 'aspect-video' },
-                    { type: 'image', src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80', cols: 'md:col-span-5', aspect: 'aspect-video' }
+                    { type: 'video', src: 'IMG_1636.mp4', cols: 'md:col-span-7', aspect: 'aspect-video', title: 'Tech Showcase', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png' },
+                    { type: 'image', src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80', cols: 'md:col-span-5', aspect: 'aspect-video', title: 'Corporate Vision', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/1280px-Sony_logo.svg.png' },
+                    { type: 'video', src: 'IMG_1636.mp4', cols: 'md:col-span-12', aspect: 'aspect-[21/9]', title: 'Brand Manifesto', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Red_Digital_Cinema_logo.svg/1280px-Red_Digital_Cinema_logo.svg.png' }
                 ],
                 logos: [
                     { name: "Sony", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/1280px-Sony_logo.svg.png" },
@@ -330,24 +337,26 @@
         function renderShowreel(theme) {
             const grid = document.getElementById('showreel-grid');
             grid.innerHTML = content[theme].showreel.map(item => {
-                if (item.type === 'video') {
-                    const mimeType = item.src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
-                    return `
-                        <div class="${item.cols} ${item.aspect} overflow-hidden rounded-xl bg-black thin-border relative group">
-                            <video class="w-full h-full object-cover opacity-80 group-hover:scale-[1.01] transition-transform duration-700" autoplay loop muted playsinline>
-                                <source src="${item.src}" type="${mimeType}">
-                            </video>
-                        </div>
-                    `;
-                } else {
-                    return `
-                        <div class="${item.cols} ${item.aspect} bg-cover bg-center rounded-xl thin-border relative group" style="background-image: url('${item.src}')">
-                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                <i data-lucide="play" class="w-6 h-6 text-white stroke-[1.25]"></i>
+                const mediaHtml = item.type === 'video'
+                    ? `<video class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all duration-700" autoplay loop muted playsinline>
+                        <source src="${item.src}" type="${item.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'}">
+                       </video>`
+                    : `<div class="w-full h-full bg-cover bg-center opacity-60 group-hover:opacity-80 transition-all duration-700" style="background-image: url('${item.src}')"></div>`;
+
+                return `
+                    <div class="${item.cols} ${item.aspect} overflow-hidden rounded-xl bg-black thin-border relative group cursor-pointer" onclick="window.location.href='galeria-exclusiva.html'">
+                        ${mediaHtml}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                            <img src="${item.clientLogo}" class="h-4 w-auto object-contain mb-3 filter brightness-0 invert opacity-70" alt="Logo">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-white text-[10px] uppercase tracking-[0.2em] font-medium">${item.title}</h4>
+                                <span class="text-white text-[9px] uppercase tracking-widest flex items-center gap-2">
+                                    Ver Vídeo <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+                                </span>
                             </div>
                         </div>
-                    `;
-                }
+                    </div>
+                `;
             }).join('');
             lucide.createIcons();
         }
