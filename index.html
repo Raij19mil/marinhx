@@ -9,22 +9,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2 family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Helvetica:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Helvetica', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
             transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .serif-font {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Helvetica', serif;
         }
 
-        /* Smooth Scroll Fade Effect */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -36,7 +35,6 @@
             transform: translateY(0);
         }
 
-        /* Hero Fullscreen Video Config */
         .hero-video-container {
             position: absolute;
             top: 0;
@@ -54,7 +52,6 @@
             transition: background 0.8s ease;
         }
 
-        /* Color Themes Layout Variables */
         .theme-events {
             --bg-main: #FBF9F6;
             --bg-card: rgba(255, 255, 255, 0.6);
@@ -77,20 +74,10 @@
             color: var(--text-main);
         }
 
-        /* Micro Borders and Adjustments for High-End Feel */
-        .thin-border {
-            border: 0.5px solid var(--border-alpha);
-        }
+        .thin-border { border: 0.5px solid var(--border-alpha); }
+        .thin-border-b { border-bottom: 0.5px solid var(--border-alpha); }
+        .thin-border-t { border-top: 0.5px solid var(--border-alpha); }
 
-        .thin-border-b {
-            border-bottom: 0.5px solid var(--border-alpha);
-        }
-
-        .thin-border-t {
-            border-top: 0.5px solid var(--border-alpha);
-        }
-
-        /* Parallax & Scale Transitions */
         .hero-video-element {
             width: 100%;
             height: 100%;
@@ -120,47 +107,40 @@
     <section class="w-full h-screen relative flex flex-col justify-between z-10 thin-border-b">
         <div class="hero-video-container">
             <div id="hero-overlay" class="bg-gradient-hero"></div>
-            <video id="video-events-hero"
-                class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-100" autoplay loop muted
-                playsinline>
+            <video id="video-events-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-100" autoplay loop muted playsinline>
                 <source src="SaveClip.webm" type="video/webm">
             </video>
-            <video id="video-inst-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-0"
-                loop muted playsinline>
+            <video id="video-inst-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-0" loop muted playsinline>
                 <source src="IMG_1636.mp4" type="video/mp4">
             </video>
         </div>
 
-        <header class="w-full max-w-6xl mx-auto px-8 py-6 flex justify-between items-center z-30 relative">
-            <div class="text-xl font-light tracking-[0.3em] text-[var(--text-main)]">DM</div>
+        <header class="w-full max-w-6xl mx-auto px-4 sm:px-8 py-6 z-50 relative flex justify-center">
+            <nav class="w-full flex justify-between items-center px-6 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-lg transition-all duration-500">
 
-            <div
-                class="relative bg-black/5 dark:bg-white/5 backdrop-blur-md rounded-full p-0.5 flex items-center thin-border transition-all duration-500">
-                <button id="toggle-events"
-                    class="px-5 py-1.5 rounded-full text-[10px] font-medium uppercase tracking-widest transition-all duration-300 relative z-10 text-[var(--text-main)]"
-                    onclick="switchTheme('events')">
-                    Eventos
-                </button>
-                <button id="toggle-inst"
-                    class="px-5 py-1.5 rounded-full text-[10px] font-medium uppercase tracking-widest transition-all duration-300 relative z-10 text-[var(--text-muted)]"
-                    onclick="switchTheme('institutional')">
-                    Institucional
-                </button>
-            </div>
+                <div class="text-xl font-light tracking-[0.3em] text-white">D M</div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <button id="nav-events" onclick="switchTheme('events')" class="text-white text-xs font-semibold uppercase tracking-widest transition-colors">Eventos</button>
+                    <button id="nav-inst" onclick="switchTheme('institutional')" class="text-white/50 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Institucional</button>
+                    <div class="w-[1px] h-4 bg-white/20"></div> <a href="#showreel-grid" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Portfólio</a>
+                    <a href="#services-grid" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Serviços</a>
+                </div>
+
+                <a href="#contact-title" class="bg-white text-black px-6 py-2 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-gray-200 hover:scale-105 transition-all duration-300">
+                    Orçamento
+                </a>
+            </nav>
         </header>
 
         <div class="w-full max-w-6xl mx-auto px-8 mb-24 z-30 relative mt-auto">
             <div class="max-w-2xl">
-                <span class="text-[10px] uppercase tracking-[0.4em] opacity-60 mb-4 block" id="hero-tagline">Eventos /
-                    Intimista</span>
-                <h1 class="text-3xl sm:text-5xl md:text-6xl serif-font font-extralight leading-[1.15] transition-all duration-700"
-                    id="hero-title">
+                <span class="text-[10px] uppercase tracking-[0.4em] opacity-60 mb-4 block" id="hero-tagline">Eventos / Intimista</span>
+                <h1 class="text-3xl sm:text-5xl md:text-6xl serif-font font-extralight leading-[1.15] transition-all duration-700" id="hero-title">
                     Técnica com sensibilidade
                 </h1>
-                <p class="mt-4 text-xs sm:text-sm font-light tracking-wide max-w-md opacity-70 leading-relaxed"
-                    id="hero-subtitle">
-                    Seu sonho em um Filme. Capturando instantes intangíveis através de lentes cinematográficas de alta
-                    precisão.
+                <p class="mt-4 text-xs sm:text-sm font-light tracking-wide max-w-md opacity-70 leading-relaxed" id="hero-subtitle">
+                    Seu sonho em um Filme. Capturando instantes intangíveis através de lentes cinematográficas de alta precisão.
                 </p>
             </div>
         </div>
@@ -171,58 +151,59 @@
         <section class="w-full max-w-6xl mx-auto px-8 py-24 reveal">
             <div class="flex items-center justify-between mb-12">
                 <div>
-                    <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Portfolio em
-                        movimento</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Portfolio em movimento</span>
                     <h2 class="text-xl font-light tracking-wider uppercase">Filmes em Destaque</h2>
                 </div>
                 <div class="w-1/3 h-[0.5px] bg-[var(--border-alpha)]"></div>
             </div>
 
-            <div id="showreel-grid" class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div id="showreel-grid" class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+                </div>
+
+            <div class="w-full mt-12">
+                <div class="w-full aspect-video rounded-xl overflow-hidden thin-border shadow-2xl bg-black relative group">
+                    <iframe class="w-full h-full absolute inset-0" 
+                            src="https://youtu.be/y3CUf2GL9Bs?si=1iYQR3rho8yrk1A1" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="text-center text-[10px] uppercase tracking-[0.2em] opacity-50 mt-4 font-light">Assista à nossa última produção em 4K</p>
             </div>
         </section>
 
-        <section class="w-full max-w-6xl mx-auto px-8 py-20 border-t border-[var(--border-alpha)] reveal">
+        <section id="services-grid-container" class="w-full max-w-6xl mx-auto px-8 py-20 border-t border-[var(--border-alpha)] reveal">
             <div class="max-w-md mb-16">
                 <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Estrutura e escopo</span>
                 <h2 class="text-xl font-light uppercase tracking-wider">Nossas frentes de atuação</h2>
             </div>
-
-            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            </div>
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
         </section>
 
         <section class="w-full max-w-6xl mx-auto px-8 py-24 border-t border-[var(--border-alpha)] reveal">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 <div class="lg:col-span-4 sticky top-12">
-                    <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Workflow de Alto
-                        Padrão</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">Workflow de Alto Padrão</span>
                     <h2 class="text-xl font-light uppercase tracking-wider mb-6">Como moldamos a sua obra</h2>
-                    <p class="text-xs font-light opacity-60 leading-relaxed">Cada frame passa por etapas meticulosas de
-                        refinamento estético e alinhamento conceitual de storytelling.</p>
+                    <p class="text-xs font-light opacity-60 leading-relaxed">Cada frame passa por etapas meticulosas de refinamento estético e alinhamento conceitual de storytelling.</p>
                 </div>
                 <div class="lg:col-span-8 space-y-8">
                     <div class="p-6 thin-border rounded-xl bg-[var(--bg-card)] backdrop-blur-sm">
                         <span class="text-xs font-light serif-font opacity-40 block mb-1">01 / Direção Narrativa</span>
                         <h4 class="text-sm font-medium tracking-wide mb-2">Planejamento e Pré-produção</h4>
-                        <p class="text-xs font-light opacity-60 leading-relaxed">Definição do tom, decupagem de cenas e
-                            intenção emocional para alinhar o filme aos objetivos visuais refinados do projeto.</p>
+                        <p class="text-xs font-light opacity-60 leading-relaxed">Definição do tom, decupagem de cenas e intenção emocional para alinhar o filme aos objetivos visuais refinados do projeto.</p>
                     </div>
                     <div class="p-6 thin-border rounded-xl bg-[var(--bg-card)] backdrop-blur-sm">
-                        <span class="text-xs font-light serif-font opacity-40 block mb-1">02 / Direção de
-                            Fotografia</span>
+                        <span class="text-xs font-light serif-font opacity-40 block mb-1">02 / Direção de Fotografia</span>
                         <h4 class="text-sm font-medium tracking-wide mb-2">Captação em Lentes de Cinema</h4>
-                        <p class="text-xs font-light opacity-60 leading-relaxed">Utilização de iluminação cirúrgica,
-                            movimentos fluidos de camera rig e enquadramentos de alta moda inspirados na estética Vogue.
-                        </p>
+                        <p class="text-xs font-light opacity-60 leading-relaxed">Utilização de iluminação cirúrgica, movimentos fluidos de camera rig e enquadramentos de alta moda inspirados na estética Vogue.</p>
                     </div>
                     <div class="p-6 thin-border rounded-xl bg-[var(--bg-card)] backdrop-blur-sm">
-                        <span class="text-xs font-light serif-font opacity-40 block mb-1">03 / Pós-produção
-                            Avançada</span>
+                        <span class="text-xs font-light serif-font opacity-40 block mb-1">03 / Pós-produção Avançada</span>
                         <h4 class="text-sm font-medium tracking-wide mb-2">Color Grading & Sound Design</h4>
-                        <p class="text-xs font-light opacity-60 leading-relaxed">Edição de ritmo preciso, mixagem
-                            imersiva e colorização personalizada em matrizes cromáticas luxuosas de nível internacional.
-                        </p>
+                        <p class="text-xs font-light opacity-60 leading-relaxed">Edição de ritmo preciso, mixagem imersiva e colorização personalizada em matrizes cromáticas luxuosas de nível internacional.</p>
                     </div>
                 </div>
             </div>
@@ -230,11 +211,8 @@
 
         <section class="w-full py-12 thin-border-t thin-border-b bg-[var(--bg-card)] reveal">
             <div class="max-w-6xl mx-auto px-8">
-                <p class="text-[9px] uppercase tracking-[0.25em] text-center mb-8 opacity-50 font-light">Marcas e
-                    Direções atendidas</p>
-                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale contrast-200"
-                    id="logos-container">
-                </div>
+                <p class="text-[9px] uppercase tracking-[0.25em] text-center mb-8 opacity-50 font-light">Marcas e Direções atendidas</p>
+                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale contrast-200" id="logos-container"></div>
             </div>
         </section>
 
@@ -247,8 +225,7 @@
                     <p class="text-xs opacity-60 font-light max-w-sm mb-10 leading-relaxed">
                         Desenvolvemos projetos sob medida alinhados às suas expectativas estéticas e de posicionamento.
                     </p>
-                    <button
-                        class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full text-[10px] font-semibold uppercase tracking-widest bg-[var(--text-main)] text-[var(--bg-main)] transition-transform duration-500 hover:scale-[1.03] shadow-md">
+                    <button class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full text-[10px] font-semibold uppercase tracking-widest bg-[var(--text-main)] text-[var(--bg-main)] transition-transform duration-500 hover:scale-[1.03] shadow-md">
                         Solicitar Atendimento
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </button>
@@ -257,23 +234,16 @@
                 <form class="space-y-8 w-full">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div class="relative">
-                            <input type="text" placeholder="Seu nome"
-                                class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40"
-                                required>
+                            <input type="text" placeholder="Seu nome" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40" required>
                         </div>
                         <div class="relative">
-                            <input type="email" placeholder="Seu e-mail"
-                                class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40"
-                                required>
+                            <input type="email" placeholder="Seu e-mail" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40" required>
                         </div>
                     </div>
                     <div class="relative">
-                        <textarea rows="2" placeholder="Conte-nos brevemente a sua visão artística"
-                            class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40 resize-none"
-                            required></textarea>
+                        <textarea rows="2" placeholder="Conte-nos brevemente a sua visão artística" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40 resize-none" required></textarea>
                     </div>
-                    <button type="submit"
-                        class="text-[10px] font-bold uppercase tracking-widest pb-1.5 border-b border-[var(--text-main)] hover:opacity-50 transition-opacity">
+                    <button type="submit" class="text-[10px] font-bold uppercase tracking-widest pb-1.5 border-b border-[var(--text-main)] hover:opacity-50 transition-opacity">
                         Enviar briefing
                     </button>
                 </form>
@@ -281,15 +251,13 @@
         </section>
     </main>
 
-    <footer
-        class="w-full bg-[var(--bg-main)] text-center py-8 text-[9px] uppercase tracking-widest opacity-40 thin-border-t z-20 relative transition-colors duration-700">
+    <footer class="w-full bg-[var(--bg-main)] text-center py-8 text-[9px] uppercase tracking-widest opacity-40 thin-border-t z-20 relative transition-colors duration-700">
         &copy; 2026 DM Filmes. All rights reserved.
     </footer>
 
     <script>
         lucide.createIcons();
 
-        // Reveal-on-Scroll Engine Layout
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -298,10 +266,8 @@
                 }
             });
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // Content Database Configuration
         const content = {
             events: {
                 heroTagline: "Eventos / Intimista",
@@ -345,7 +311,6 @@
             }
         };
 
-        // Render Functions Module
         function renderServices(theme) {
             const grid = document.getElementById('services-grid');
             grid.innerHTML = content[theme].services.map(s => `
@@ -395,15 +360,8 @@
         function updateOverlayAndStyles(theme) {
             const overlay = document.getElementById('hero-overlay');
             overlay.style.background = content[theme].heroBlend;
-
-            if (theme === 'events') {
-                document.documentElement.style.setProperty('--logo-filter', 'none');
-            } else {
-                document.documentElement.style.setProperty('--logo-filter', 'invert(1) brightness(2)');
-            }
         }
 
-        // Particle Transition Burst Framework
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -447,13 +405,13 @@
             else { canvas.style.opacity = '0'; }
         }
 
-        // Theme Switch Architecture Controller
+        // Função de controle de Tema Atualizada para a nova Navbar
         function switchTheme(theme) {
             const body = document.body;
             const vEvents = document.getElementById('video-events-hero');
             const vInst = document.getElementById('video-inst-hero');
-            const btnEvents = document.getElementById('toggle-events');
-            const btnInst = document.getElementById('toggle-inst');
+            const navEvents = document.getElementById('nav-events');
+            const navInst = document.getElementById('nav-inst');
 
             triggerDustBurst();
 
@@ -462,18 +420,17 @@
                 vEvents.style.opacity = '1'; vInst.style.opacity = '0';
                 vInst.pause(); vEvents.play();
 
-                btnEvents.classList.replace('text-[var(--text-muted)]', 'text-[var(--text-main)]');
-                btnInst.classList.replace('text-[var(--text-main)]', 'text-[var(--text-muted)]');
+                navEvents.className = 'text-white text-xs font-semibold uppercase tracking-widest transition-colors';
+                navInst.className = 'text-white/50 hover:text-white text-xs font-light uppercase tracking-widest transition-colors';
             } else {
                 body.className = "theme-institutional min-h-screen relative flex flex-col justify-between";
                 vEvents.style.opacity = '0'; vInst.style.opacity = '1';
                 vEvents.pause(); vInst.play();
 
-                btnInst.classList.replace('text-[var(--text-muted)]', 'text-[var(--text-main)]');
-                btnEvents.classList.replace('text-[var(--text-main)]', 'text-[var(--text-muted)]');
+                navInst.className = 'text-white text-xs font-semibold uppercase tracking-widest transition-colors';
+                navEvents.className = 'text-white/50 hover:text-white text-xs font-light uppercase tracking-widest transition-colors';
             }
 
-            // Update Text Node Items
             document.getElementById('hero-tagline').innerText = content[theme].heroTagline;
             document.getElementById('hero-subtitle').innerText = content[theme].heroSubtitle;
             document.getElementById('contact-title').innerText = content[theme].contactTitle;
@@ -484,7 +441,6 @@
             renderLogos(theme);
         }
 
-        // Initialize Native Page View
         updateOverlayAndStyles('events');
         renderServices('events');
         renderShowreel('events');

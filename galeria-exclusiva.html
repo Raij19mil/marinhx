@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DM - Entrega Exclusiva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FBF9F6; /* Cor clara e elegante para casamentos/eventos */
+            color: #2A2421;
+        }
+        .serif-font { font-family: 'Playfair Display', serif; }
+        .thin-border { border: 0.5px solid rgba(42, 36, 33, 0.08); }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center py-16 px-6">
+
+    <header class="w-full max-w-5xl mx-auto flex justify-center mb-24">
+        <div class="text-2xl font-light tracking-[0.4em] text-[#2A2421]">D M</div>
+    </header>
+
+    <main class="w-full max-w-4xl mx-auto flex flex-col items-center text-center">
+        
+        <span class="text-[10px] uppercase tracking-[0.4em] opacity-60 mb-6 block">Wedding Film</span>
+        <h1 class="text-4xl sm:text-5xl serif-font font-extralight leading-[1.2] mb-4">
+            João & Maria
+        </h1>
+        <p class="text-sm font-light tracking-widest opacity-60 mb-16">
+            12 de Outubro de 2026 • Fazenda Boa Vista
+        </p>
+
+        <div class="w-full aspect-video rounded-xl overflow-hidden thin-border shadow-2xl bg-black relative group mb-12">
+            <iframe class="w-full h-full absolute inset-0" 
+                    src="https://www.youtube.com/embed/ScMzIvxBSi4?si=YOUR_CODE_HERE" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        
+        <div class="max-w-2xl text-xs sm:text-sm font-light opacity-70 leading-relaxed space-y-4">
+            <p>Foi uma honra registrar o início dessa nova etapa. Cada frame deste filme foi desenhado para eternizar a essência, os sorrisos e a verdade do dia de vocês.</p>
+            <p>Com carinho,<br>Equipe DM Produções.</p>
+        </div>
+
+    </main>
+
+    <footer class="w-full text-center py-16 mt-auto text-[9px] uppercase tracking-widest opacity-40">
+        &copy; 2026 DM Filmes. Documentando Legados.
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
