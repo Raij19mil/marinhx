@@ -162,8 +162,8 @@
 
             <div class="w-full mt-12">
                 <div class="w-full aspect-video rounded-xl overflow-hidden thin-border shadow-2xl bg-black relative group">
-                    <iframe class="w-full h-full absolute inset-0" 
-                            src="https://youtu.be/y3CUf2GL9Bs?si=1iYQR3rho8yrk1A1" 
+                    <iframe id="main-youtube-iframe" class="w-full h-full absolute inset-0" 
+                            src="https://www.youtube.com/embed/y3CUf2GL9Bs?si=NGmcfvaJSCJljVzn" 
                             title="YouTube video player" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -287,7 +287,8 @@
                     { name: "Vogue", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vogue_Logo.svg/1280px-Vogue_Logo.svg.png" },
                     { name: "Tiffany", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Tiffany_%26_Co._logo.svg/1280px-Tiffany_%26_Co._logo.svg.png" }
                 ],
-                contactTitle: "Quer alguém que realmente se importe com o que está captando?"
+                contactTitle: "Quer alguém que realmente se importe com o que está captando?",
+                youtubeUrl: "https://www.youtube.com/embed/y3CUf2GL9Bs?si=NGmcfvaJSCJljVzn"
             },
             institutional: {
                 heroTagline: "Institucional / Corporativo",
@@ -307,7 +308,8 @@
                     { name: "RED", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Red_Digital_Cinema_logo.svg/1280px-Red_Digital_Cinema_logo.svg.png" },
                     { name: "Apple", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png" }
                 ],
-                contactTitle: "Pronto para elevar o patamar audiovisual da sua marca?"
+                contactTitle: "Pronto para elevar o patamar audiovisual da sua marca?",
+                youtubeUrl: "https://www.youtube.com/embed/y3CUf2GL9Bs?si=yqORRnsO3lqsZX7p"
             }
         };
 
@@ -434,6 +436,7 @@
             document.getElementById('hero-tagline').innerText = content[theme].heroTagline;
             document.getElementById('hero-subtitle').innerText = content[theme].heroSubtitle;
             document.getElementById('contact-title').innerText = content[theme].contactTitle;
+            document.getElementById('main-youtube-iframe').src = content[theme].youtubeUrl;
 
             updateOverlayAndStyles(theme);
             renderServices(theme);
