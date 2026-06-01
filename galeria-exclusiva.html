@@ -32,34 +32,12 @@
 
 <body class="min-h-screen flex flex-col items-center py-16 px-6 theme-events" id="body-render">
 
-    <header class="w-full max-w-5xl mx-auto flex justify-center mb-24">
+    <header id="gallery-header" class="w-full max-w-5xl mx-auto flex justify-center mb-24 transition-all duration-500">
         <a href="index.html" class="text-2xl font-light tracking-[0.4em] transition-colors" id="logo-text">D M</a>
     </header>
 
-    <main class="w-full max-w-4xl mx-auto flex flex-col items-center text-center">
-        
-        <span id="gallery-tagline" class="text-[10px] uppercase tracking-[0.4em] text-muted mb-6 block">Wedding Film</span>
-        <h1 id="gallery-title" class="text-4xl sm:text-5xl serif-font font-extralight leading-[1.2] mb-4">
-            João & Maria
-        </h1>
-        <p id="gallery-subtitle" class="text-sm font-light tracking-widest text-muted mb-16">
-            12 de Outubro de 2026 • Fazenda Boa Vista
-        </p>
-
-        <div class="w-full aspect-video rounded-xl overflow-hidden thin-border shadow-2xl bg-black relative group mb-12">
-            <iframe id="gallery-video" class="w-full h-full absolute inset-0" 
-                    src="https://www.youtube.com/embed/ScMzIvxBSi4" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-            </iframe>
-        </div>
-        
-        <div id="gallery-description" class="max-w-2xl text-xs sm:text-sm font-light text-muted leading-relaxed space-y-4">
-            <p>Foi uma honra registrar o início dessa nova etapa. Cada frame deste filme foi desenhado para eternizar a essência, os sorrisos e a verdade deste momento.</p>
-        </div>
-
+    <main id="gallery-main" class="w-full max-w-4xl mx-auto flex flex-col items-center text-center transition-all duration-500">
+        <!-- Renderizado via JS -->
     </main>
 
     <footer class="w-full text-center py-16 mt-auto text-[9px] uppercase tracking-widest opacity-40">
@@ -95,21 +73,69 @@
             const data = content[type];
 
             if (data) {
-                // Aplica o tema visual
+                // Aplica o tema visual no body
                 const body = document.getElementById('body-render');
                 body.className = `min-h-screen flex flex-col items-center py-16 px-6 ${data.theme}`;
                 
-                // Atualiza Textos
-                document.getElementById('gallery-tagline').innerText = data.tagline;
-                document.getElementById('gallery-title').innerText = data.title;
-                document.getElementById('gallery-subtitle').innerText = data.subtitle;
-                document.getElementById('gallery-description').innerHTML = data.desc;
-                
-                // Atualiza Vídeo
-                document.getElementById('gallery-video').src = data.video;
+                const header = document.getElementById('gallery-header');
+                const main = document.getElementById('gallery-main');
 
-                // Ajuste de logo (cor branca no institucional)
-                if(type === 'institutional') {
+                if (type === 'events') {
+                    // Layout Romântico e Centralizado para Eventos
+                    header.className = "w-full max-w-5xl mx-auto flex justify-center mb-24";
+                    main.className = "w-full max-w-4xl mx-auto flex flex-col items-center text-center";
+                    main.innerHTML = `
+                        <span class="text-[10px] uppercase tracking-[0.4em] text-muted mb-6 block">${data.tagline}</span>
+                        <h1 class="text-4xl sm:text-5xl serif-font font-extralight leading-[1.2] mb-4">${data.title}</h1>
+                        <p class="text-sm font-light tracking-widest text-muted mb-16">${data.subtitle}</p>
+
+                        <div class="w-full aspect-video rounded-xl overflow-hidden thin-border shadow-2xl bg-black relative group mb-12">
+                            <iframe class="w-full h-full absolute inset-0" 
+                                    src="${data.video}" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                        
+                        <div class="max-w-2xl text-xs sm:text-sm font-light text-muted leading-relaxed space-y-4">
+                            ${data.desc}
+                        </div>
+                    `;
+                    document.getElementById('logo-text').classList.remove('text-white');
+                } else {
+                    // Layout Corporativo e Grid para Institucional
+                    body.className = `min-h-screen flex flex-col py-16 px-6 sm:px-12 ${data.theme}`;
+                    header.className = "w-full max-w-7xl mx-auto flex justify-start mb-16";
+                    main.className = "w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-16";
+                    main.innerHTML = `
+                        <div class="lg:col-span-5 text-left space-y-8 order-2 lg:order-1">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-[0.4em] text-muted mb-4 block">${data.tagline}</span>
+                                <h1 class="text-4xl sm:text-5xl font-light leading-[1.1] mb-6 tracking-wide">${data.title}</h1>
+                                <p class="text-xs sm:text-sm font-light tracking-widest text-muted border-l border-white/20 pl-4 py-1">${data.subtitle}</p>
+                            </div>
+                            <div class="text-xs sm:text-sm font-light text-muted leading-relaxed space-y-4 max-w-md">
+                                ${data.desc}
+                            </div>
+                            <div class="pt-8">
+                                <a href="index.html" class="inline-flex items-center gap-3 px-6 py-3 rounded-none text-[9px] font-semibold uppercase tracking-widest border border-white/20 hover:bg-white hover:text-black transition-all duration-500">
+                                    Voltar ao Início
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-7 w-full aspect-video shadow-2xl bg-black relative group order-1 lg:order-2">
+                            <iframe class="w-full h-full absolute inset-0 filter grayscale-[15%]" 
+                                    src="${data.video}" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    `;
                     document.getElementById('logo-text').classList.add('text-white');
                 }
             }
