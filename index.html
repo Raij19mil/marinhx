@@ -344,7 +344,7 @@
                     : `<div class="w-full h-full bg-cover bg-center opacity-60 group-hover:opacity-80 transition-all duration-700" style="background-image: url('${item.src}')"></div>`;
 
                 return `
-                    <div class="${item.cols} ${item.aspect} overflow-hidden rounded-xl bg-black thin-border relative group cursor-pointer" onclick="window.location.href='galeria-exclusiva.html'">
+                    <div class="${item.cols} ${item.aspect} overflow-hidden rounded-xl bg-black thin-border relative group cursor-pointer" onclick="window.location.href='galeria-exclusiva.html?type=${theme}'">
                         ${mediaHtml}
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                             <img src="${item.clientLogo}" class="h-4 w-auto object-contain mb-3 filter brightness-0 invert opacity-70" alt="Logo">
