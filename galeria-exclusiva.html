@@ -4,7 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DM - Entrega Exclusiva</title>
+    <title>Portfólio - DM Produções</title>
+
+    <!-- SEO & Open Graph -->
+    <meta name="description" content="Explore o portfólio de filmes de casamento e vídeos institucionais da DM Produções Cinematográficas.">
+    <meta property="og:title" content="Portfólio - DM Produções">
+    <meta property="og:description" content="Explore nosso portfólio completo de eventos e produções institucionais.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://marinhx.vercel.app/galeria-exclusiva.html">
+    <meta name="twitter:card" content="summary_large_image">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,135 +22,100 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            background-color: #0A0A0A;
+            color: #F3F4F6;
+            scroll-behavior: smooth;
         }
         .serif-font { font-family: 'Playfair Display', serif; }
-        
-        /* Tema Eventos (Claro) */
-        .theme-events { background-color: #FBF9F6; color: #2A2421; }
-        .theme-events .thin-border { border: 0.5px solid rgba(42, 36, 33, 0.08); }
-        .theme-events .text-muted { opacity: 0.6; }
-
-        /* Tema Institucional (Escuro) */
-        .theme-institutional { background-color: #0A0A0A; color: #F3F4F6; }
-        .theme-institutional .thin-border { border: 0.5px solid rgba(255, 255, 255, 0.1); }
-        .theme-institutional .text-muted { opacity: 0.5; }
-        .theme-institutional iframe { filter: grayscale(20%); }
+        .thin-border { border: 0.5px solid rgba(255, 255, 255, 0.1); }
+        .filter-btn.active { border-color: white; opacity: 1; }
+        .filter-btn { opacity: 0.5; transition: all 0.3s ease; }
+        .filter-btn:hover { opacity: 0.8; }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col items-center py-16 px-6 theme-events" id="body-render">
+<body class="min-h-screen flex flex-col">
 
-    <header id="gallery-header" class="w-full max-w-5xl mx-auto flex justify-center mb-24 transition-all duration-500">
-        <a href="index.html" class="text-2xl font-light tracking-[0.4em] transition-colors" id="logo-text">D M</a>
+    <header class="w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 z-50 relative flex justify-between items-center border-b border-white/10 mb-12">
+        <a href="index.html" class="text-xl font-light tracking-[0.3em] text-white hover:opacity-70 transition-opacity">D M</a>
+        <div class="hidden md:flex items-center gap-8">
+            <a href="galeria-exclusiva.html" class="text-white text-xs font-semibold uppercase tracking-widest transition-colors">Portfólio</a>
+            <a href="nossa-visao.html" class="text-white/50 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Nossa Visão</a>
+            <a href="index.html#contact-section" class="text-white/50 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Orçamento</a>
+        </div>
+        <a href="index.html" class="text-[10px] uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">
+            <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar à Home
+        </a>
     </header>
 
-    <main id="gallery-main" class="w-full max-w-4xl mx-auto flex flex-col items-center text-center transition-all duration-500">
-        <!-- Renderizado via JS -->
+    <main class="w-full max-w-7xl mx-auto px-6 sm:px-12 flex flex-col grow mb-24">
+        
+        <div class="mb-16">
+            <h1 class="text-4xl sm:text-6xl font-light leading-[1.1] mb-6 tracking-wide">Acervo Audiovisual</h1>
+            <p class="text-xs sm:text-sm font-light tracking-widest text-gray-400 max-w-md">Uma seleção cuidadosa das nossas produções mais recentes e impactantes.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-6 mb-12 border-b border-white/10 pb-4">
+            <button onclick="filterPortfolio('all')" class="filter-btn active text-[10px] uppercase tracking-[0.2em] font-semibold pb-2 border-b-2 border-transparent" data-filter="all">Todos os Projetos</button>
+            <button onclick="filterPortfolio('events')" class="filter-btn text-[10px] uppercase tracking-[0.2em] font-semibold pb-2 border-b-2 border-transparent" data-filter="events">Eventos e Casamentos</button>
+            <button onclick="filterPortfolio('institutional')" class="filter-btn text-[10px] uppercase tracking-[0.2em] font-semibold pb-2 border-b-2 border-transparent" data-filter="institutional">Institucional e Marcas</button>
+        </div>
+
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Grid rendered by JS -->
+        </div>
+
     </main>
 
-    <footer class="w-full text-center py-16 mt-auto text-[9px] uppercase tracking-widest opacity-40">
+    <footer class="w-full text-center py-16 mt-auto text-[9px] uppercase tracking-widest opacity-40 border-t border-white/10">
         &copy; 2026 DM Filmes. Documentando Legados.
     </footer>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5587991518505?text=Olá! Vim pelo site e gostaria de solicitar um orçamento." target="_blank" class="fixed bottom-6 right-6 z-[9999] bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+    </a>
+
+    <script src="data.js"></script>
     <script>
         lucide.createIcons();
 
-        // Lógica de Diferenciação
-        const content = {
-            events: {
-                tagline: "Wedding Film",
-                title: "João & Maria",
-                subtitle: "12 de Outubro de 2026 • Fazenda Boa Vista",
-                video: "https://www.youtube.com/embed/ScMzIvxBSi4",
-                desc: "<p>Foi uma honra registrar o início dessa nova etapa. Cada frame deste filme foi desenhado para eternizar a essência, os sorrisos e a verdade do dia de vocês.</p><p>Com carinho,<br>Equipe DM Produções.</p>",
-                theme: "theme-events"
-            },
-            institutional: {
-                tagline: "Brand Documentary",
-                title: "Inovação Tech 2026",
-                subtitle: "Sede Corporativa • São Paulo",
-                video: "https://www.youtube.com/embed/y3CUf2GL9Bs",
-                desc: "<p>Nesta produção institucional, mergulhamos na cultura da marca para traduzir valores em imagens. O foco foi a precisão técnica e o posicionamento de mercado através de uma estética cinematográfica.</p><p>Direção: Davi Marinho</p>",
-                theme: "theme-institutional"
-            }
-        };
-
-        function initGallery() {
-            const params = new URLSearchParams(window.location.search);
-            const type = params.get('type') || 'events'; // Padrão é eventos
-            const data = content[type];
-
-            if (data) {
-                // Aplica o tema visual no body
-                const body = document.getElementById('body-render');
-                body.className = `min-h-screen flex flex-col items-center py-16 px-6 ${data.theme}`;
-                
-                const header = document.getElementById('gallery-header');
-                const main = document.getElementById('gallery-main');
-
-                if (type === 'events') {
-                    // Layout Romântico e Centralizado para Eventos
-                    header.className = "w-full max-w-5xl mx-auto flex justify-center mb-24";
-                    main.className = "w-full max-w-4xl mx-auto flex flex-col items-center text-center";
-                    main.innerHTML = `
-                        <span class="text-[10px] uppercase tracking-[0.4em] text-muted mb-6 block">${data.tagline}</span>
-                        <h1 class="text-4xl sm:text-5xl serif-font font-extralight leading-[1.2] mb-4">${data.title}</h1>
-                        <p class="text-sm font-light tracking-widest text-muted mb-16">${data.subtitle}</p>
-
-                        <div class="w-full aspect-video rounded-xl overflow-hidden thin-border shadow-2xl bg-black relative group mb-12">
-                            <iframe class="w-full h-full absolute inset-0" 
-                                    src="${data.video}" 
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                        
-                        <div class="max-w-2xl text-xs sm:text-sm font-light text-muted leading-relaxed space-y-4">
-                            ${data.desc}
-                        </div>
-                    `;
-                    document.getElementById('logo-text').classList.remove('text-white');
-                } else {
-                    // Layout Corporativo e Grid para Institucional
-                    body.className = `min-h-screen flex flex-col py-16 px-6 sm:px-12 ${data.theme}`;
-                    header.className = "w-full max-w-7xl mx-auto flex justify-start mb-16";
-                    main.className = "w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-16";
-                    main.innerHTML = `
-                        <div class="lg:col-span-5 text-left space-y-8 order-2 lg:order-1">
-                            <div>
-                                <span class="text-[10px] uppercase tracking-[0.4em] text-muted mb-4 block">${data.tagline}</span>
-                                <h1 class="text-4xl sm:text-5xl font-light leading-[1.1] mb-6 tracking-wide">${data.title}</h1>
-                                <p class="text-xs sm:text-sm font-light tracking-widest text-muted border-l border-white/20 pl-4 py-1">${data.subtitle}</p>
-                            </div>
-                            <div class="text-xs sm:text-sm font-light text-muted leading-relaxed space-y-4 max-w-md">
-                                ${data.desc}
-                            </div>
-                            <div class="pt-8">
-                                <a href="index.html" class="inline-flex items-center gap-3 px-6 py-3 rounded-none text-[9px] font-semibold uppercase tracking-widest border border-white/20 hover:bg-white hover:text-black transition-all duration-500">
-                                    Voltar ao Início
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-7 w-full aspect-video shadow-2xl bg-black relative group order-1 lg:order-2">
-                            <iframe class="w-full h-full absolute inset-0 filter grayscale-[15%]" 
-                                    src="${data.video}" 
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                    `;
-                    document.getElementById('logo-text').classList.add('text-white');
-                }
-            }
+        function renderPortfolio(category = 'all') {
+            const grid = document.getElementById('portfolio-grid');
+            const projects = category === 'all' 
+                ? dmData.projects 
+                : dmData.projects.filter(p => p.category === category);
+            
+            grid.innerHTML = projects.map(item => `
+                <div class="aspect-[4/5] overflow-hidden rounded-xl bg-black thin-border relative group cursor-pointer" onclick="window.location.href='projeto.html?id=${item.id}'">
+                    <img src="${item.thumb}" loading="lazy" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700" alt="${item.title}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100 flex flex-col justify-end p-8">
+                        <span class="text-white/60 text-[9px] uppercase tracking-widest mb-2">${item.tagline}</span>
+                        <h4 class="text-white text-lg uppercase tracking-[0.1em] font-light mb-4">${item.title}</h4>
+                        <span class="text-white text-[9px] uppercase tracking-widest flex items-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                            Assistir <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
         }
 
-        window.onload = initGallery;
+        function filterPortfolio(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if(btn.dataset.filter === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            renderPortfolio(category);
+        }
+
+        // Init
+        const params = new URLSearchParams(window.location.search);
+        const typeParam = params.get('type') || 'all';
+        filterPortfolio(typeParam);
     </script>
 </body>
 </html>

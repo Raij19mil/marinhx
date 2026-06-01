@@ -5,12 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DM - Produções Cinematográficas</title>
+    
+    <!-- SEO & Open Graph -->
+    <meta name="description" content="DM Produções Cinematográficas — filmes de casamento e vídeos institucionais com estética de alta moda. Narrativa refinada e cinematográfica.">
+    <meta property="og:title" content="DM Produções Cinematográficas">
+    <meta property="og:description" content="Filmes de casamento e vídeos institucionais com estética de alta moda. Narrativa refinada e cinematográfica.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://marinhx.vercel.app">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "DM Produções Cinematográficas",
+      "image": "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=1200&q=80",
+      "telephone": "+5587991518505",
+      "url": "https://marinhx.vercel.app"
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Helvetica:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
@@ -107,28 +126,27 @@
     <section class="w-full h-screen relative flex flex-col justify-between z-10 thin-border-b">
         <div class="hero-video-container">
             <div id="hero-overlay" class="bg-gradient-hero"></div>
-            <video id="video-events-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-100" autoplay loop muted playsinline>
+            <!-- Videos with proper lazy load / preload attributes -->
+            <video id="video-events-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-100" autoplay loop muted playsinline preload="auto">
                 <source src="SaveClip.webm" type="video/webm">
             </video>
-            <video id="video-inst-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-0" loop muted playsinline>
+            <video id="video-inst-hero" class="hero-video-element absolute inset-0 w-full h-full object-cover opacity-0" loop muted playsinline preload="none">
                 <source src="IMG_1636.mp4" type="video/mp4">
             </video>
         </div>
 
         <header class="w-full max-w-6xl mx-auto px-4 sm:px-8 py-6 z-50 relative flex justify-center">
             <nav class="w-full flex justify-between items-center px-6 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-lg transition-all duration-500">
-
                 <div class="text-xl font-light tracking-[0.3em] text-white">D M</div>
-
                 <div class="hidden md:flex items-center gap-8">
                     <button id="nav-events" onclick="switchTheme('events')" class="text-white text-xs font-semibold uppercase tracking-widest transition-colors">Eventos</button>
                     <button id="nav-inst" onclick="switchTheme('institutional')" class="text-white/50 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Institucional</button>
-                    <div class="w-[1px] h-4 bg-white/20"></div> <a href="#showreel-grid" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Portfólio</a>
+                    <div class="w-[1px] h-4 bg-white/20"></div> 
+                    <a href="#showreel-grid" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Portfólio</a>
                     <a href="nossa-visao.html" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Nossa Visão</a>
                     <a href="#services-grid" class="text-white/70 hover:text-white text-xs font-light uppercase tracking-widest transition-colors">Serviços</a>
                 </div>
-
-                <a href="#contact-title" class="bg-white text-black px-6 py-2 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-gray-200 hover:scale-105 transition-all duration-300">
+                <a href="#contact-section" class="bg-white text-black px-6 py-2 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-gray-200 hover:scale-105 transition-all duration-300">
                     Orçamento
                 </a>
             </nav>
@@ -157,22 +175,23 @@
                 </div>
                 <div class="flex items-center gap-6 grow justify-end">
                     <div class="hidden sm:block h-[0.5px] bg-[var(--border-alpha)] grow max-w-[200px]"></div>
-                    <a href="galeria-exclusiva.html" class="text-[10px] uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">Ver mais <i data-lucide="plus" class="w-3 h-3"></i></a>
+                    <a href="galeria-exclusiva.html" class="text-[10px] uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">Ver galeria completa <i data-lucide="plus" class="w-3 h-3"></i></a>
                 </div>
             </div>
 
-            <div id="showreel-grid" class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
-                </div>
+            <div id="showreel-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- Dynamically populated from data.js -->
+            </div>
 
             <div class="w-full mt-12">
-                <div class="w-full aspect-video rounded-xl overflow-hidden thin-border shadow-2xl bg-black relative group">
-                    <iframe id="main-youtube-iframe" class="w-full h-full absolute inset-0" 
-                            src="https://www.youtube.com/embed/y3CUf2GL9Bs?si=NGmcfvaJSCJljVzn" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                    </iframe>
+                <!-- Lite YouTube Embed -->
+                <div class="w-full aspect-video rounded-xl overflow-hidden thin-border shadow-2xl bg-black relative group yt-lazy cursor-pointer" data-id="y3CUf2GL9Bs" id="main-yt-container">
+                    <img src="https://img.youtube.com/vi/y3CUf2GL9Bs/maxresdefault.jpg" alt="Video thumbnail" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" id="main-yt-thumb">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+                        </div>
+                    </div>
                 </div>
                 <p class="text-center text-[10px] uppercase tracking-[0.2em] opacity-50 mt-4 font-light">Assista à nossa última produção em 4K</p>
             </div>
@@ -220,7 +239,20 @@
             </div>
         </section>
 
-        <section class="w-full max-w-6xl mx-auto px-8 py-24 reveal">
+        <!-- Testimonials -->
+        <section class="w-full py-24 bg-[var(--bg-main)] reveal thin-border-b">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="mb-16 text-center">
+                    <span class="text-[9px] uppercase tracking-[0.3em] opacity-50 block mb-2">O que dizem sobre nós</span>
+                    <h2 class="text-xl font-light uppercase tracking-wider">Depoimentos</h2>
+                </div>
+                <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-section" class="w-full max-w-6xl mx-auto px-8 py-24 reveal">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                 <div>
                     <h3 class="text-2xl sm:text-3xl serif-font font-light mb-6 leading-snug" id="contact-title">
@@ -229,39 +261,66 @@
                     <p class="text-xs opacity-60 font-light max-w-sm mb-10 leading-relaxed">
                         Desenvolvemos projetos sob medida alinhados às suas expectativas estéticas e de posicionamento.
                     </p>
-                    <button class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full text-[10px] font-semibold uppercase tracking-widest bg-[var(--text-main)] text-[var(--bg-main)] transition-transform duration-500 hover:scale-[1.03] shadow-md">
-                        Solicitar Atendimento
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                    </button>
+                    <div class="space-y-4 text-xs font-light opacity-70">
+                        <p class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4"></i> contato@dmproducoes.com</p>
+                        <p class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4"></i> +55 (87) 99151-8505</p>
+                        <p class="flex items-center gap-3"><i data-lucide="instagram" class="w-4 h-4"></i> @dmproducoes</p>
+                    </div>
                 </div>
 
-                <form class="space-y-8 w-full">
+                <form id="contact-form" class="space-y-8 w-full">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div class="relative">
-                            <input type="text" placeholder="Seu nome" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40" required>
+                            <input type="text" id="c-name" placeholder="Seu nome" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40" required>
                         </div>
                         <div class="relative">
-                            <input type="email" placeholder="Seu e-mail" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40" required>
+                            <select id="c-type" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors text-[var(--text-main)]" required>
+                                <option value="" disabled selected class="bg-[var(--bg-main)]">Tipo de projeto</option>
+                                <option value="Casamento/Cerimônia" class="bg-[var(--bg-main)]">Casamento / Cerimônia</option>
+                                <option value="Institucional/Marca" class="bg-[var(--bg-main)]">Institucional / Marca</option>
+                                <option value="Publicidade" class="bg-[var(--bg-main)]">Publicidade</option>
+                                <option value="Documentário" class="bg-[var(--bg-main)]">Documentário</option>
+                            </select>
+                        </div>
+                        <div class="relative">
+                            <input type="date" id="c-date" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors text-[var(--text-muted)]" required>
+                        </div>
+                        <div class="relative">
+                            <input type="text" id="c-city" placeholder="Cidade / Local" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40" required>
                         </div>
                     </div>
                     <div class="relative">
-                        <textarea rows="2" placeholder="Conte-nos brevemente a sua visão artística" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40 resize-none" required></textarea>
+                        <textarea id="c-message" rows="3" placeholder="Conte-nos brevemente a sua visão artística e orçamento estimado" class="w-full bg-transparent border-b border-[var(--border-alpha)] pb-2 text-xs font-light focus:outline-none focus:border-[var(--text-main)] transition-colors placeholder:text-[var(--text-muted)] placeholder:opacity-40 resize-none" required></textarea>
                     </div>
-                    <button type="submit" class="text-[10px] font-bold uppercase tracking-widest pb-1.5 border-b border-[var(--text-main)] hover:opacity-50 transition-opacity">
-                        Enviar briefing
+                    <button type="submit" class="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest pb-1.5 border-b border-[var(--text-main)] hover:opacity-50 transition-opacity">
+                        Enviar briefing via WhatsApp
+                        <i data-lucide="arrow-right" class="w-3 h-3"></i>
                     </button>
                 </form>
             </div>
         </section>
     </main>
 
-    <footer class="w-full bg-[var(--bg-main)] text-center py-8 text-[9px] uppercase tracking-widest opacity-40 thin-border-t z-20 relative transition-colors duration-700">
-        &copy; 2026 DM Filmes. All rights reserved.
+    <footer class="w-full bg-[var(--bg-main)] text-center py-12 text-[9px] uppercase tracking-widest opacity-40 thin-border-t z-20 relative transition-colors duration-700">
+        <div class="mb-4 space-x-6">
+            <a href="https://wa.me/5587991518505" target="_blank" class="hover:underline">WhatsApp</a>
+            <a href="#" class="hover:underline">Instagram</a>
+            <a href="nossa-visao.html" class="hover:underline">Nossa Visão</a>
+        </div>
+        &copy; 2026 DM Filmes. Todos os direitos reservados.
     </footer>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5587991518505?text=Olá! Vim pelo site e gostaria de solicitar um orçamento." target="_blank" class="fixed bottom-6 right-6 z-[9999] bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+    </a>
+
+    <!-- Import data -->
+    <script src="data.js"></script>
     <script>
         lucide.createIcons();
 
+        // Lazy load and Reveal
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -271,6 +330,28 @@
             });
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         revealElements.forEach(el => revealObserver.observe(el));
+
+        // Lite YouTube
+        document.querySelectorAll('.yt-lazy').forEach(el => {
+            el.addEventListener('click', () => {
+                const id = el.dataset.id;
+                el.innerHTML = `<iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+            });
+        });
+
+        // WhatsApp Form Submit
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('c-name').value;
+            const type = document.getElementById('c-type').value;
+            const date = document.getElementById('c-date').value;
+            const city = document.getElementById('c-city').value;
+            const message = document.getElementById('c-message').value;
+
+            const text = `Olá! Meu nome é *${name}*.\nGostaria de solicitar um orçamento para um projeto de *${type}*.\n*Data/Previsão:* ${date}\n*Local:* ${city}\n\n*Sobre o projeto:* ${message}`;
+            const encodedText = encodeURIComponent(text);
+            window.open(`https://wa.me/${dmData.whatsappNumber}?text=${encodedText}`, '_blank');
+        });
 
         const content = {
             events: {
@@ -282,19 +363,8 @@
                     { icon: "video", title: "Vídeo Teaser", desc: "Filmes dinâmicos de 1 a 3 minutos perfeitos para o ecossistema digital corporativo ou pessoal." },
                     { icon: "film", title: "Longa-Metragem Cerimonial", desc: "Cobertura de longa duração rica em áudio original e edição cinematográfica detalhada." }
                 ],
-                showreel: [
-                    { type: 'video', src: 'SaveClip.webm', cols: 'md:col-span-8', aspect: 'aspect-[21/9]', title: 'João & Maria', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Tiffany_%26_Co._logo.svg/1280px-Tiffany_%26_Co._logo.svg.png' },
-                    { type: 'image', src: 'https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=600&q=80', cols: 'md:col-span-4', aspect: 'aspect-square', title: 'Wedding Editorial', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vogue_Logo.svg/1280px-Vogue_Logo.svg.png' },
-                    { type: 'video', src: 'SaveClip.webm', cols: 'md:col-span-4', aspect: 'aspect-video', title: 'Recife Gala', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/CVC_logo.svg/1280px-CVC_logo.svg.png' },
-                    { type: 'image', src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80', cols: 'md:col-span-8', aspect: 'aspect-[21/9]', title: 'Summer Event', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/1280px-Sony_logo.svg.png' }
-                ],
-                logos: [
-                    { name: "CVC", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/CVC_logo.svg/1280px-CVC_logo.svg.png" },
-                    { name: "Vogue", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vogue_Logo.svg/1280px-Vogue_Logo.svg.png" },
-                    { name: "Tiffany", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Tiffany_%26_Co._logo.svg/1280px-Tiffany_%26_Co._logo.svg.png" }
-                ],
                 contactTitle: "Quer alguém que realmente se importe com o que está captando?",
-                youtubeUrl: "https://www.youtube.com/embed/y3CUf2GL9Bs?si=NGmcfvaJSCJljVzn"
+                youtubeUrlId: "y3CUf2GL9Bs"
             },
             institutional: {
                 heroTagline: "Institucional / Corporativo",
@@ -305,18 +375,8 @@
                     { icon: "clapperboard", title: "Filmes Corporativos", desc: "Cobertura de painéis, grandes convenções e lançamentos com acabamento impecável." },
                     { icon: "tv", title: "Comerciais de Conversão", desc: "Anúncios estruturados com foco em engajamento emocional, alto valor percebido e estética elegante." }
                 ],
-                showreel: [
-                    { type: 'video', src: 'IMG_1636.mp4', cols: 'md:col-span-7', aspect: 'aspect-video', title: 'Tech Showcase', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png' },
-                    { type: 'image', src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80', cols: 'md:col-span-5', aspect: 'aspect-video', title: 'Corporate Vision', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/1280px-Sony_logo.svg.png' },
-                    { type: 'video', src: 'IMG_1636.mp4', cols: 'md:col-span-12', aspect: 'aspect-[21/9]', title: 'Brand Manifesto', clientLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Red_Digital_Cinema_logo.svg/1280px-Red_Digital_Cinema_logo.svg.png' }
-                ],
-                logos: [
-                    { name: "Sony", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/1280px-Sony_logo.svg.png" },
-                    { name: "RED", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Red_Digital_Cinema_logo.svg/1280px-Red_Digital_Cinema_logo.svg.png" },
-                    { name: "Apple", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png" }
-                ],
                 contactTitle: "Pronto para elevar o patamar audiovisual da sua marca?",
-                youtubeUrl: "https://www.youtube.com/embed/y3CUf2GL9Bs?si=yqORRnsO3lqsZX7p"
+                youtubeUrlId: "ScMzIvxBSi4"
             }
         };
 
@@ -336,35 +396,46 @@
 
         function renderShowreel(theme) {
             const grid = document.getElementById('showreel-grid');
-            grid.innerHTML = content[theme].showreel.map(item => {
-                const mediaHtml = item.type === 'video'
-                    ? `<video class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all duration-700" autoplay loop muted playsinline>
-                        <source src="${item.src}" type="${item.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'}">
-                       </video>`
-                    : `<div class="w-full h-full bg-cover bg-center opacity-60 group-hover:opacity-80 transition-all duration-700" style="background-image: url('${item.src}')"></div>`;
-
-                return `
-                    <div class="${item.cols} ${item.aspect} overflow-hidden rounded-xl bg-black thin-border relative group cursor-pointer" onclick="window.location.href='galeria-exclusiva.html?type=${theme}'">
-                        ${mediaHtml}
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                            <img src="${item.clientLogo}" class="h-4 w-auto object-contain mb-3 filter brightness-0 invert opacity-70" alt="Logo">
-                            <div class="flex items-center justify-between">
-                                <h4 class="text-white text-[10px] uppercase tracking-[0.2em] font-medium">${item.title}</h4>
-                                <span class="text-white text-[9px] uppercase tracking-widest flex items-center gap-2">
-                                    Ver Vídeo <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-                                </span>
-                            </div>
+            // Filter projects by theme
+            const filteredProjects = dmData.projects.filter(p => p.category === theme).slice(0, 4);
+            
+            grid.innerHTML = filteredProjects.map(item => `
+                <div class="aspect-video overflow-hidden rounded-xl bg-black thin-border relative group cursor-pointer" onclick="window.location.href='projeto.html?id=${item.id}'">
+                    <img src="${item.thumb}" loading="lazy" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all duration-700" alt="${item.title}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                        <span class="text-white/70 text-[9px] uppercase tracking-widest mb-1">${item.tagline}</span>
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-white text-[12px] uppercase tracking-[0.2em] font-medium">${item.title}</h4>
+                            <span class="text-white text-[9px] uppercase tracking-widest flex items-center gap-2">
+                                Ver Projeto <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+                            </span>
                         </div>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `).join('');
             lucide.createIcons();
         }
 
-        function renderLogos(theme) {
+        function renderLogos() {
             const container = document.getElementById('logos-container');
-            container.innerHTML = content[theme].logos.map(logo => `
-                <img src="${logo.url}" alt="${logo.name}" class="h-4 object-contain max-w-[100px] transition-all duration-700">
+            container.innerHTML = dmData.logos.map(logo => `
+                <img src="${logo.url}" alt="${logo.name}" loading="lazy" class="h-4 object-contain max-w-[100px] transition-all duration-700 hover:grayscale-0 hover:opacity-100">
+            `).join('');
+        }
+
+        function renderTestimonials(theme) {
+            const container = document.getElementById('testimonials-grid');
+            const filtered = dmData.testimonials.filter(t => t.category === theme);
+            
+            container.innerHTML = filtered.map(t => `
+                <div class="p-8 thin-border rounded-xl bg-[var(--bg-card)] backdrop-blur-sm text-center flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-[var(--text-main)] text-[var(--bg-main)] flex items-center justify-center font-bold serif-font mb-4 opacity-80">
+                        ${t.author.charAt(0)}
+                    </div>
+                    <p class="text-xs font-light italic leading-relaxed opacity-80 mb-6">"${t.quote}"</p>
+                    <span class="text-[10px] font-medium uppercase tracking-widest">${t.author}</span>
+                    <span class="text-[9px] opacity-50 uppercase tracking-widest mt-1">${t.role}</span>
+                </div>
             `).join('');
         }
 
@@ -416,7 +487,6 @@
             else { canvas.style.opacity = '0'; }
         }
 
-        // Função de controle de Tema Atualizada para a nova Navbar
         function switchTheme(theme) {
             const body = document.body;
             const vEvents = document.getElementById('video-events-hero');
@@ -445,19 +515,36 @@
             document.getElementById('hero-tagline').innerText = content[theme].heroTagline;
             document.getElementById('hero-subtitle').innerText = content[theme].heroSubtitle;
             document.getElementById('contact-title').innerText = content[theme].contactTitle;
-            document.getElementById('main-youtube-iframe').src = content[theme].youtubeUrl;
+
+            // Update Lite YT embed
+            const ytContainer = document.getElementById('main-yt-container');
+            const ytId = content[theme].youtubeUrlId;
+            ytContainer.dataset.id = ytId;
+            document.getElementById('main-yt-thumb').src = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+            // Reset if already playing
+            if(ytContainer.querySelector('iframe')) {
+                ytContainer.innerHTML = `
+                    <img src="https://img.youtube.com/vi/${ytId}/maxresdefault.jpg" alt="Video thumbnail" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" id="main-yt-thumb">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+                        </div>
+                    </div>
+                `;
+            }
 
             updateOverlayAndStyles(theme);
             renderServices(theme);
             renderShowreel(theme);
-            renderLogos(theme);
+            renderTestimonials(theme);
+            renderLogos();
         }
 
         updateOverlayAndStyles('events');
         renderServices('events');
         renderShowreel('events');
-        renderLogos('events');
+        renderTestimonials('events');
+        renderLogos();
     </script>
 </body>
-
 </html>
